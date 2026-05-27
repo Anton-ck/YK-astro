@@ -7,4 +7,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  site: 'https://Anton-ck.github.io',
+  base: 'YK-astro',
 });
