@@ -8,5 +8,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: 'https://Anton-ck.github.io',
-  //base: 'YK-astro',
+  base: 'YK-astro',
 });
