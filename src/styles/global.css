@@ -4,15 +4,7 @@
 @plugin "@tailwindcss/typography";
 
 @plugin "daisyui" {
-  /*dark --prefersdark; */
-}
-
-@plugin "daisyui/theme" {
-  name: 'light';
-  default: true;
-  --color-base-content: white;
-  --color-primary: blue;
-  --color-secondary: teal;
+  themes: light --default;
 }
 
 @theme {
