@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import about from '/src/assets/about/about.webp';
+import AboutContent from '../content/about.md';
 ---
 
 <section id="about" class="container mx-auto flex-initial px-4 py-10 md:py-16">
@@ -16,13 +17,13 @@ import about from '/src/assets/about/about.webp';
     />
     <div class="w-full md:flex-1">
       <h2 class="font-antonio text-2xl text-black md:text-3xl lg:text-4xl">
-        Я хАрошА))
+        The photographer Yulia Kovalenko
       </h2>
-      <p
-        class="mt-4 max-w-prose text-sm leading-7 text-base md:text-base md:leading-8"
+      <div
+        class="prose prose-neutral mt-4 max-w-prose text-base leading-7 md:leading-8"
       >
-        Дайтє 4 жалкіє пАчкІ дЄнЄг :-)
-      </p>
+        <AboutContent />
+      </div>
     </div>
   </div>
 </section>
