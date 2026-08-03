@@ -68,7 +68,9 @@ import { Image } from 'astro:assets';
                 <a href="#about" class="font-antonio tracking-wide">Про мене</a>
               </li>
               <li>
-                <a href="/" class="font-antonio tracking-wide">Прайс</a>
+                <a href="#price" class="font-antonio tracking-wide"
+                  >Прайс та умови</a
+                >
               </li>
               <li>
                 <a href="/" class="font-antonio tracking-wide">Портфоліо</a>
@@ -95,9 +97,9 @@ import { Image } from 'astro:assets';
             </li>
             <li class="flex flex-col">
               <a
-                href="/"
+                href="#price"
                 class="link link-hover py-4 font-antonio tracking-wide text-white lg:py-6"
-                >Прайс</a
+                >Прайс та умови</a
               >
               <div class="border-b border-white/25 w-full"></div>
             </li>
@@ -149,7 +151,7 @@ import { Image } from 'astro:assets';
       class="flex flex-col items-center justify-center gap-4 bg-neutral p-4 text-neutral-content sm:flex-row sm:gap-6"
     >
       <aside class="text-center sm:text-left">
-        <p>© {new Date().getFullYear()}  Studio D.A. All rights reserved</p>
+        <p>© {new Date().getFullYear()} Studio D.A. All rights reserved</p>
       </aside>
       <nav class="flex items-center gap-5" aria-label="Social links">
         <a
