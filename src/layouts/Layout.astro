@@ -16,12 +16,15 @@ import { Image } from 'astro:assets';
   </head>
   <body>
     <header class="relative min-h-screen overflow-hidden">
-      <Image
-        src={background}
-        alt="Hero"
-        fetchpriority="high"
-        class="absolute inset-0 w-full h-full object-cover object-center"
-      />
+      <div class="absolute inset-0">
+        <Image
+          src={background}
+          alt="Hero"
+          fetchpriority="high"
+          class="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <div class="absolute inset-0 bg-black/70" aria-hidden="true"></div>
+      </div>
 
       <div
         class="container relative z-10 mx-auto mt-6 flex w-full flex-col items-center px-4 py-4 sm:px-6 md:flex-row md:items-start md:justify-between md:py-6"
