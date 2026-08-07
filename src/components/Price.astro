@@ -1,14 +1,23 @@
 ---
 import { Image } from 'astro:assets';
 import standard from '/src/assets/price/portrait.webp';
-import econom from '/src/assets/price/econom.webp';
-import premium from '/src/assets/price/premium.webp';
+import express from '/src/assets/price/express.webp';
+import reportage from '/src/assets/price/reportag.webp';
+import children from '/src/assets/price/child.webp';
+import family from '/src/assets/price/family.webp';
+import wedding from '/src/assets/price/wedding.webp';
+import trip from '/src/assets/price/trip.webp';
 import price from '../content/price.json';
+import PriceConditions from '../content/price-conditions.md';
 
 const images = {
   standard,
-  econom,
-  premium,
+  express,
+  reportage,
+  children,
+  family,
+  wedding,
+  trip,
 } as const;
 
 const packages = Object.entries(price);
@@ -27,19 +36,41 @@ const packages = Object.entries(price);
               {pkg.title}
             </h2>
             <p class="font-antonio text-1xl text-black md:text-1xl lg:text-1xl pb-5">
-              {pkg.description}
+              {pkg.city}
             </p>
-            <p class="font-antonio text-2xl text-black md:text-2xl lg:text-2xl pb-5">
-              {pkg.price}
-            </p>
+            {pkg.description && (
+              <p class="font-antonio text-1xl text-black md:text-1xl lg:text-1xl pb-5">
+                {pkg.description}
+              </p>
+            )}
+            {pkg.price &&
+              pkg.price.map((price) => (
+                <p class="font-antonio text-2xl text-black md:text-2xl lg:text-2xl pb-5">
+                  {price}
+                </p>
+              ))}
+            {pkg.discount && (
+              <ul>
+                {pkg.discount.map((discount) => (
+                  <li class="font-antonio text-1xl text-black md:text-1xl lg:text-1xl pb-2 text-left ">
+                    {discount}
+                  </li>
+                ))}
+              </ul>
+            )}
             <div class="prose-headings:font-antonio prose-p:font-antonio prose prose-neutral mt-4 max-w-prose text-base leading-7 md:leading-8">
               <ul>
                 {pkg.features.map((feature) => (
                   <li>{feature}</li>
                 ))}
               </ul>
-              {pkg.footer && <p>{pkg.footer}</p>}
             </div>
+            {pkg.footer &&
+              pkg.footer.map((footer) => (
+                <p class="font-antonio text-1xl text-black md:text-1xl lg:text-1xl pb-2 text-left ">
+                  {footer}
+                </p>
+              ))}
           </div>
           <Image
             src={images[key as keyof typeof images] as ImageMetadata}
@@ -52,4 +83,18 @@ const packages = Object.entries(price);
       ))
     }
   </ul>
+  <div
+    class="mx-auto flex w-full max-w-7xl flex-col items-center rounded-xl bg-gray-100 px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12"
+  >
+    <h2
+      class="font-antonio w-full text-center text-2xl text-black pb-6 md:text-3xl md:pb-8 lg:text-4xl"
+    >
+      Умови співпраці
+    </h2>
+    <div
+      class="prose-headings:font-antonio prose-p:font-antonio prose-li:font-antonio prose prose-neutral w-full max-w-prose text-left text-sm leading-6 sm:text-base sm:leading-7 md:max-w-2xl md:text-base md:leading-8 lg:max-w-3xl"
+    >
+      <PriceConditions />
+    </div>
+  </div>
 </section>
