@@ -20,7 +20,9 @@ if (!album) {
 ---
 
 <Layout compact title={`${album.title} — Yilia Kovalenko Photographer`}>
-  <section class="container mx-auto flex-initial px-4 py-10 md:py-16">
+  <section
+    class="container mx-auto flex-initial px-4 py-10 md:py-16 min-h-[calc(100dvh-4rem-3rem)]"
+  >
     <div class="mx-auto flex w-full max-w-7xl flex-col gap-8 md:gap-12">
       <div>
         <a
@@ -38,34 +40,32 @@ if (!album) {
           {album.description}
         </p>
       </div>
-      <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
+      <ul
+        id="gallery"
+        class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6"
+      >
         {
           album.photos.map(async (photo) => {
             const optimizedImage = await getImage({
               src: photo.src,
               width: 1920,
-              // height: 1080,
             });
-            console.log('optimizedImage', optimizedImage.src);
             return (
               <li class="overflow-hidden rounded-xl">
-                <div id="gallery">
-                  <a
-                    href={optimizedImage.src}
-                    data-pswp-width={optimizedImage.attributes.width}
-                    data-pswp-height={optimizedImage.attributes.height}
-                    target="_blank"
-                    class="overflow-hidden rounded-md"
-                  >
-                    <Image
-                      src={photo.src}
-                      alt={album.title}
-                      widths={[400, 640, 960, 1280]}
-                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-                      class="aspect-[3/4] h-auto w-full object-cover object-center"
-                    />
-                  </a>
-                </div>
+                <a
+                  href={optimizedImage.src}
+                  data-pswp-width={optimizedImage.attributes.width}
+                  data-pswp-height={optimizedImage.attributes.height}
+                  target="_blank"
+                >
+                  <Image
+                    src={photo.src}
+                    alt={album.title}
+                    widths={[400, 640, 960, 1280]}
+                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+                    class="aspect-[3/4] h-auto w-full object-cover object-center"
+                  />
+                </a>
               </li>
             );
           })
@@ -83,7 +83,6 @@ if (!album) {
     gallery: '#gallery',
     children: 'a',
     pswpModule: () => import('photoswipe'),
-    arrowKeys: true,
   });
 
   lightbox.init();

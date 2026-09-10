@@ -12,7 +12,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.3.2"
+    "astro": "^7.3.2",
+    "photoswipe": "^5.4.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "github:tailwindcss/typography",

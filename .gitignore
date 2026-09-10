@@ -22,3 +22,26 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+
+
+# Игнорировать все файлы в portfolio
+/src/assets/portfolio/**
+
+# Но позволить Git зайти в папки альбомов
+!/src/assets/portfolio/*/
+
+# Оставлять обложку каждого альбома
+!/src/assets/portfolio/*/cover.webp
+
+# Оставлять конкретные фото из альбома children
+!/src/assets/portfolio/children/01.webp
+!/src/assets/portfolio/children/02.webp
+!/src/assets/portfolio/children/03.webp
+!/src/assets/portfolio/children/04.webp
+!/src/assets/portfolio/children/05.webp
+!/src/assets/portfolio/children/06.webp
+!/src/assets/portfolio/children/07.webp
+!/src/assets/portfolio/children/08.webp
+!/src/assets/portfolio/children/09.webp
+!/src/assets/portfolio/children/10.webp
