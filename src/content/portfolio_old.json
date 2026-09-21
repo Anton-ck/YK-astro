@@ -40,7 +40,11 @@
     "title": "Репортаж",
     "description": ""
   },
-
+  {
+    "slug": "trip",
+    "title": "Подорожі",
+    "description": ""
+  },
   {
     "slug": "secret",
     "title": "Ню",
