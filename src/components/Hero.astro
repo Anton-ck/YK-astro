@@ -19,35 +19,43 @@ import { withBase } from '../lib/paths';
   <div
     class="container relative z-10 mx-auto mt-6 flex w-full flex-col items-center px-4 py-4 sm:px-6 md:flex-row md:items-start md:justify-between md:py-6"
   >
-    <div class="drawer drawer-start w-full md:hidden">
-      <input id="mobile-menu-drawer" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content flex w-full justify-start">
-        <label
-          for="mobile-menu-drawer"
-          class="btn btn-ghost border border-white/25 text-white hover:bg-white/10"
-          aria-label="Open menu"
+    <div class="w-full md:hidden">
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="btn btn-ghost border border-white/25 text-white hover:bg-white/10"
+        aria-label="Open menu"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          class="h-6 w-6 stroke-current"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="h-6 w-6 stroke-current"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </label>
-      </div>
-      <div class="drawer-side z-20">
-        <label
-          for="mobile-menu-drawer"
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <div
+        id="mobile-menu"
+        class="pointer-events-none fixed inset-0 z-20 opacity-0 transition-opacity duration-150 ease-out"
+        aria-hidden="true"
+      >
+        <button
+          type="button"
+          class="absolute inset-0 h-full w-full cursor-default bg-black/20"
           aria-label="Close menu"
-          class="drawer-overlay bg-transparent"></label>
+          data-mobile-menu-close
+        ></button>
         <ul
-          class="menu min-h-full w-64 border-r border-white/25 bg-transparent p-6 text-white backdrop-blur-sm"
+          class="menu relative min-h-full w-64 -translate-x-full border-r border-white/25 bg-transparent p-6 text-white transition-transform duration-300 ease-in-out will-change-transform backdrop-blur-sm"
+          data-mobile-menu-panel
         >
           <li>
             <a href={withBase()} class="font-antonio tracking-wide">Головна</a>
@@ -137,3 +145,46 @@ import { withBase } from '../lib/paths';
     </nav>
   </div>
 </header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('#mobile-menu-toggle');
+  const menu = document.querySelector<HTMLElement>('#mobile-menu');
+  const panel = document.querySelector<HTMLElement>('[data-mobile-menu-panel]');
+
+  if (toggle && menu && panel) {
+    let closeTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const setMenuOpen = (isOpen: boolean) => {
+      if (closeTimer) clearTimeout(closeTimer);
+
+      if (isOpen) {
+        menu.classList.remove('pointer-events-none', 'opacity-0');
+        panel.classList.remove('-translate-x-full');
+      } else {
+        menu.classList.add('opacity-0');
+        panel.classList.add('-translate-x-full');
+        closeTimer = setTimeout(() => {
+          menu.classList.add('pointer-events-none');
+        }, 300);
+      }
+
+      menu.setAttribute('aria-hidden', String(!isOpen));
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    };
+
+    toggle.addEventListener('click', () => {
+      setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    menu.addEventListener('click', (event) => {
+      if ((event.target as Element).closest('[data-mobile-menu-close], a')) {
+        setMenuOpen(false);
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    });
+  }
+</script>
