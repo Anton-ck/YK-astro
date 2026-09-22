@@ -13,7 +13,7 @@ const { compact = false, title = 'Yilia Kovalenko Photographer' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="ua">
+<html lang="ua" id="top" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -91,5 +91,32 @@ const { compact = false, title = 'Yilia Kovalenko Photographer' } = Astro.props;
         </a>
       </nav>
     </footer>
+    <a
+      href="#top"
+      id="back-to-top"
+      class="font-antonio pointer-events-none fixed right-4 bottom-28 z-30 flex h-12 min-w-12 items-center justify-center rounded-full bg-neutral px-4 text-sm tracking-wide text-white opacity-0 shadow-lg transition-opacity hover:opacity-80 sm:right-6"
+      aria-label="Наверх"
+    >
+      ⬆
+    </a>
+    <script>
+      const button = document.getElementById('back-to-top');
+
+      const toggleBackToTop = () => {
+        const visible = window.scrollY > 400;
+        button?.classList.toggle('opacity-0', !visible);
+        button?.classList.toggle('pointer-events-none', !visible);
+      };
+
+      window.addEventListener('scroll', toggleBackToTop, { passive: true });
+      toggleBackToTop();
+      document.addEventListener(
+        'astro:before-swap',
+        () => {
+          window.removeEventListener('scroll', toggleBackToTop);
+        },
+        { once: true },
+      );
+    </script>
   </body>
 </html>
